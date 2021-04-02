@@ -1,11 +1,16 @@
 pipeline {
  agent any
   stages {
-     stage ("Build") {
+     stage ("mvn Build") {
       steps {
-       sh  "echo from git"
+       sh  "mvn clean install"
+      }
+     }
+      stage ("Create docker image") {
+       steps {
+        sh "docker image build -t mydockerdemo ."
       }
      }
   }
- 
-}
+ }
+
